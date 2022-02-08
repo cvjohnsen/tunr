@@ -2,7 +2,7 @@
 import { Component } from 'react';
 import './App.css';
 import playlists from './data';
-console.log(playlists);
+import Song from './Song';
 
 class App extends Component{
   state=  {
@@ -53,11 +53,7 @@ class App extends Component{
               <h2>{this.state.playlists.songs[0].artist}</h2>
               <h3>{this.state.playlists.songs[0].time}</h3> */}
               {this.state.playlists.songs.map(song => (
-                <div className='song' key={song.time}>
-                    <h1>{song.title}</h1>
-                    <h2>{song.artist}</h2>
-                    <h3>{song.time}</h3>
-                </div>
+               <Song song={song}/>
               ))
               }
             </div>
