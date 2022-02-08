@@ -6,7 +6,35 @@ console.log(playlists);
 
 class App extends Component{
   state=  {
-    playlists: playlists
+    playlists: playlists,
+    title: '',
+    artist:'', 
+    time:''
+  }
+
+  handleChange =(e)=> {
+    this.setState({ [e.target.id] : e.target.value})
+  }
+
+  handleSubmit =(e) =>{
+   e.preventDefault();
+   const newSong = {
+    title: this.state.title,
+    artist: this.state.artist, 
+    time: this.state.time
+   }
+
+   this.setState({
+     playlists: {
+       songs:[...this.state.playlists.songs, newSong],
+       title: this.state.title,
+       created: this.state.created
+     },
+     title: '',
+     artist:'',
+     time:''
+   })
+   console.log(this.state.playlists.songs)
   }
 
   render(){
@@ -30,10 +58,23 @@ class App extends Component{
                     <h2>{song.artist}</h2>
                     <h3>{song.time}</h3>
                 </div>
-              ))}
-
+              ))
+              }
             </div>
       </div>
+
+    <form onSubmit={this.handleSubmit}>
+      <label htmlFor='title'>Title</label>
+      <input type='text' id='title' value={this.state.title} onChange={this.handleChange}/>
+
+      <label htmlFor='artist'>Artist</label>
+      <input type='text' id='artist' value={this.state.artist} onChange={this.handleChange}/>
+
+      <label htmlFor='time'>Time</label>
+      <input type='text' id='time' value={this.state.time} onChange={this.handleChange}/>
+      
+      <input type='submit'/>
+    </form>
     </div>
   )
 }
